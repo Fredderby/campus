@@ -31,18 +31,18 @@ def campus():
             
             # Get unique regions for the first selectbox
             unique_regions = df['Region'].unique()
-            selected_region = col1.selectbox("Region", ["Select"] + list(unique_regions))
+            selected_region = col1.selectbox("Region", ["Select"] + list(unique_regions), key="region")
             
             # Filter campuses based on the selected region
             if selected_region != "Select":
                 filtered_campuses = df[df['Region'] == selected_region]['Campus'].unique()
-                selected_campus = col2.selectbox("Campus", ["Select"] + list(filtered_campuses))
+                selected_campus = col2.selectbox("Campus", ["Select"] + list(filtered_campuses), key="campus")
             else:
-                selected_campus = col2.selectbox("Campus", ["Select"])
+                selected_campus = col2.selectbox("Campus", ["Select"], key="campus")
 
             current_year = datetime.now().year
             mth = ["Select"] + [f"{datetime(2025, i, 1).strftime('%B')} {current_year}" for i in range(1, 13)]
-            month = col1.selectbox("Month", mth, key="month2")
+            month = col1.selectbox("Month", mth, key="month")
             fullname = col1.text_input("Name", key="fullname")
             if fullname:
                 # Use a different key for formatted name storage
@@ -56,9 +56,9 @@ def campus():
                     st.session_state.formatted_fullname = formatted_name
 
             select_date = datetime.now().isoformat(timespec='seconds')
-            selected_date = col2.text_input("Date of Submission", value=select_date, disabled=True)
+            selected_date = col2.text_input("Date of Submission", value=select_date, disabled=True, key="date")
 
-            baptized = col2.number_input("Number Baptized", min_value=0, value=0, key="bap")
+            baptized = col2.number_input("Number Baptized", min_value=0, value=0, key="baptized")
 
         except UnicodeDecodeError as e:
             st.error(f"Error reading the file: {e}")
@@ -78,18 +78,33 @@ def campus():
         
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            bro = st.number_input("Brothers", min_value=0, value=0, key="bro1")
-            sis = st.number_input("Sisters", min_value=0, value=0, key="bro2")
+            bro = st.number_input("Brothers", min_value=0, value=0, key="brothers")
+            sis = st.number_input("Sisters", min_value=0, value=0, key="sisters")
         with col2:
             boys = st.number_input("Children Boys", min_value=0, value=0, key="boys")
             girls = st.number_input("Children Girls", min_value=0, value=0, key="girls")
         with col3:
-            vis_male = st.number_input("Visitors Male", min_value=0, value=0, key="vis1")
-            vis_female = st.number_input("Visitors Female", min_value=0, value=0, key="vis2")
+            vis_male = st.number_input("Visitors Male", min_value=0, value=0, key="visitors_male")
+            vis_female = st.number_input("Visitors Female", min_value=0, value=0, key="visitors_female")
         with col4:
-            off1 = st.number_input("1st Offering", min_value=0.0, value=0.0, key="off1")
-            wkrs = st.number_input("Total Workers", min_value=0, value=0, key="worker12")
+            off1 = st.number_input("1st Offering", min_value=0.0, value=0.0, key="offering1")
+            wkrs = st.number_input("Total Workers", min_value=0, value=0, key="workers")
+
     submit = st.button("Submit")
+
+    if submit:
+        seers = [
+            selected_date, selected_region, selected_campus, month, baptized, bro, sis, 
+            boys, girls, vis_male, vis_female, off1, wkrs, fullname
+        ]
+        worksheet.append_row(seers)
+        st.success("Successfully submitted")
+        st.balloons()
+
+        # Clear session state
+        for key in st.session_state.keys():
+            if key in ["region", "campus", "month", "fullname", "date", "baptized", "brothers", "sisters", "boys", "girls", "vis_male", "vis_female", "offering1", "workers"]:
+                del st.session_state[key]
 
 if __name__ == "__main__":
     campus()
