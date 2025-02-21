@@ -93,6 +93,30 @@ def campus():
     submit = st.button("Submit")
 
     if submit:
+        # Validation checks
+        if selected_region == "Select":
+            st.warning("Select a Region.")
+            st.stop()
+        if selected_campus == "Select":
+            st.warning("Select a Campus.")
+            st.stop()
+        if month == "Select":
+            st.warning("Select a Month.")
+            st.stop()
+        if not fullname:
+            st.warning("Enter your Name.")
+            st.stop()
+        if not baptized:
+            st.warning("Enter the Number Baptized.")
+            st.stop()
+        if not off1:
+            st.warning("Enter the 1st Offering amount.")
+            st.stop()
+        if not wkrs:
+            st.warning("Enter the Total Workers.")
+            st.stop()
+
+        # Prepare data for submission
         seers = [
             selected_date, selected_region, selected_campus, month, baptized, bro, sis, 
             boys, girls, vis_male, vis_female, off1, wkrs, fullname
@@ -103,7 +127,7 @@ def campus():
 
         # Clear session state
         for key in st.session_state.keys():
-            if key in ["region", "campus", "month", "fullname", "date", "baptized", "brothers", "sisters", "boys", "girls", "vis_male", "vis_female", "offering1", "workers"]:
+            if key in ["region", "campus", "month", "fullname", "date", "baptized", "brothers", "sisters", "boys", "girls", "visitors_male", "visitors_female", "offering1", "workers"]:
                 del st.session_state[key]
 
 if __name__ == "__main__":
