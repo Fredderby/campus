@@ -114,7 +114,7 @@ def member():
 
         # Clear session state
         for key in st.session_state.keys():
-            if key in ["region", "campus", "period", "fullname", "date", "baptized", "brothers", "sisters", "boys", "girls", "wkrs_male", "wkrs_female"]:
+            if key in ["region", "campus", "period", "fullname", "date", "brothers", "sisters", "boys", "girls", "wkrs_male", "wkrs_female"]:
                 del st.session_state[key]
 
 if __name__ == "__main__":
