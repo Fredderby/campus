@@ -102,16 +102,7 @@ def member():
         if not fullname:
             st.warning("Enter your Name.")
             st.stop()
-        if not baptized:
-            st.warning("Enter the Number Baptized.")
-            st.stop()
-        if not wkrs_female:
-            st.warning("Enter the number of male.")
-            st.stop()
-        if not wkrs_male:
-            st.warning("Enter the number of female.")
-            st.stop()
-
+        
         # Prepare data for submission
         seers = [
             selected_date, selected_region, selected_campus, period, baptized, bro, sis, 
