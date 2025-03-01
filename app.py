@@ -1,5 +1,6 @@
 import streamlit as st
 from attendance import campus
+from membership import member
 
 # Set page configuration
 st.set_page_config(page_title="Campus Attendance App", page_icon="📝", layout="centered")
@@ -18,8 +19,11 @@ with st.container(border=True):
     # Create two columns
     col1, col2 = st.columns(2)
     # Section selection
-    sections = col1.selectbox("SELECT OPTION", ["Monthly Attendance"], key="sec121")
+    sections = col1.selectbox("SELECT OPTION", ["Membership Attendance","Monthly Attendance"], key="sec121")
     # Main function based on selection
+    if sections == "Membership Attendance":
+        member()
+
     if sections == "Monthly Attendance":
         campus()
 
