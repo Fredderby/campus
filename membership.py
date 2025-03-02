@@ -105,7 +105,7 @@ def member():
         
         # Prepare data for submission
         seers = [
-            selected_date, selected_region, selected_campus, period, baptized, bro, sis, 
+            selected_date, selected_region, selected_campus, period, bro, sis, 
             boys, girls, wkrs_male, wkrs_female, fullname
         ]
         worksheet.append_row(seers)
