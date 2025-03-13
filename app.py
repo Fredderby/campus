@@ -1,9 +1,10 @@
 import streamlit as st
 from attendance import campus
 from membership import member
+from streamlit.components.v1 import html
 
 # Set page configuration
-st.set_page_config(page_title="Campus Attendance App", page_icon="📝", layout="centered")
+st.set_page_config(page_title="Campus Attendance App", page_icon="🌱", layout="centered")
 
 # Main container with border
 with st.container(border=True):
@@ -26,6 +27,15 @@ with st.container(border=True):
 
     if sections == "Monthly Attendance":
         campus()
+
+# Add JavaScript keep-alive
+html("""
+<script>
+setInterval(function() {
+    fetch(window.location.href).then(() => console.log('Keep-alive request sent.'));
+}, 5 * 60 * 1000);
+</script>
+""")
 
 # Hide Streamlit elements
 st.markdown(
