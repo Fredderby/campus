@@ -64,7 +64,7 @@ def campus():
                 st.session_state.formatted_fullname = formatted_name
 
         # Offering and baptized inputs
-        off1 = col2.number_input("Enter 1st Offering Amount", min_value=0.0, value=0.0, key="offering1")
+        off1 = col2.number_input("1st Offering Amt (Ghȼ)", min_value=0.0, value=0.0, key="offering1")
         baptized = col2.number_input("Enter Number Baptized", min_value=0, value=0, key="baptized")
 
     st.markdown("SUNDAY WORSHIP SERVICE ATTENDANCE SUMMARY")
@@ -89,7 +89,7 @@ def campus():
         boys_low = col2.number_input("Children Boys", min_value=0, value=0, key="boys_low")
         girls_low = col2.number_input("Children Girl", min_value=0, value=0, key="girls_low")
         vis_male_low = col3.number_input("Visitors Male", min_value=0, value=0, key="visitors_male_low")
-        vis_female_low = col3.number_input("Visitors (Female)", min_value=0, value=0, key="visitors_female_low")    
+        vis_female_low = col3.number_input("Visitors Female", min_value=0, value=0, key="visitors_female_low")    
             
     submit = st.button("Submit")
 
