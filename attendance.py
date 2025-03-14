@@ -79,6 +79,9 @@ def campus():
         girls = col2.number_input("Children Girls", min_value=0, value=0, key="girls")
         vis_male = col3.number_input("Visitors Male", min_value=0, value=0, key="visitors_male")
         vis_female = col3.number_input("Visitors Female", min_value=0, value=0, key="visitors_female")
+        high_total = bro + sis + boys + girls
+        st.write("High Attendance Total:", high_total)
+
 
     # Low Attendance Week
     with st.container(border=True):
@@ -90,7 +93,17 @@ def campus():
         girls_low = col2.number_input("Children Girl", min_value=0, value=0, key="girls_low")
         vis_male_low = col3.number_input("Visitors Male", min_value=0, value=0, key="visitors_male_low")
         vis_female_low = col3.number_input("Visitors Female", min_value=0, value=0, key="visitors_female_low")    
-            
+        low_total = bro_low + sis_low + boys_low + girls_low
+        st.write("Low Attendance Total:", low_total)
+
+    with st.container(border=True):
+        st.markdown("Overall Month Attendance || Sum each Category attendance in the month")
+        col1, col2, col3 = st.columns(3)
+        bro_total = col1.number_input("Total Brothers", min_value=0, value=0, key="brothers_total")
+        sis_total = col2.number_input("Total Sisters", min_value=0, value=0, key="sisters_total")
+        child_total = col3.number_input("Total Children", min_value=0, value=0, key="boys_total")
+        st.write("Overall Attendance:",bro_total+sis_total+child_total)
+
     submit = st.button("Submit")
 
     if submit:
@@ -115,6 +128,16 @@ def campus():
             st.warning("⚠️ Please enter the 1st Offering amount.")
             validation_failed = True
         
+        # New validation checks for attendance totals
+        if low_total > high_total:
+            st.warning("⚠️ Low attendance total should not be greater than high attendance total.")
+            validation_failed = True
+        
+        overal_att = bro_total + sis_total + child_total
+        if (low_total + high_total) > overal_att:
+            st.warning("⚠️ The sum of low and high attendance totals should not exceed overall monthly attendance.")
+            validation_failed = True
+        
         if validation_failed:
             st.stop()
         
@@ -122,7 +145,7 @@ def campus():
         data_to_submit = [
             str(datetime.now()), selected_region, selected_campus, month, baptized, bro, sis, 
             boys, girls, vis_male, vis_female, bro_low, sis_low, boys_low, girls_low, 
-            vis_male_low, vis_female_low, off1, fullname
+            vis_male_low, vis_female_low, off1,bro_total, sis_total, child_total, fullname
         ]
         
         try:
