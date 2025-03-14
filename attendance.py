@@ -67,7 +67,7 @@ def campus():
         off1 = col2.number_input("1st Offering Amt (Ghȼ)", min_value=0.0, value=0.0, key="offering1")
         baptized = col2.number_input("Enter Number Baptized", min_value=0, value=0, key="baptized")
 
-    st.markdown("SUNDAY WORSHIP SERVICE ATTENDANCE SUMMARY")
+    st.markdown("**SUNDAY WORSHIP SERVICE ATTENDANCE SUMMARY**")
     
     # High Attendance Week
     with st.container(border=True):
