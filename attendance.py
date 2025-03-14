@@ -71,7 +71,7 @@ def campus():
     
     # High Attendance Week
     with st.container(border=True):
-        st.markdown("High Attendance Week || Pick the highest attendance week in the month")
+        st.markdown("Highest Attendance Week || Pick the highest attendance week in the month")
         col1, col2, col3 = st.columns(3)
         bro = col1.number_input("Brothers", min_value=0, value=0, key="brothers")
         sis = col1.number_input("Sisters", min_value=0, value=0, key="sisters")
@@ -85,7 +85,7 @@ def campus():
 
     # Low Attendance Week
     with st.container(border=True):
-        st.markdown("Low Attendance Week || Pick the lowest attendance week in the month")
+        st.markdown("Lowest Attendance Week || Pick the lowest attendance week in the month")
         col1, col2, col3 = st.columns(3)
         bro_low = col1.number_input("Brothers", min_value=0, value=0, key="brothers_low")
         sis_low = col1.number_input("Sisters", min_value=0, value=0, key="sisters_low")
